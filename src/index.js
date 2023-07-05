@@ -4,11 +4,12 @@ import { configureStore } from '@reduxjs/toolkit';
 
 import './index.css';
 import App from './components/App';
-import movies from './reducers';
+import rootReducer from './reducers';
+
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
-const store = configureStore({reducer: movies});
+const store = configureStore({reducer: rootReducer});
 console.log('store', store);
 // console.log('Before State', store.getState());
 
