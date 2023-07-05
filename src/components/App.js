@@ -43,7 +43,7 @@ class App extends React.Component {
           </div>
 
           <div className="list">
-            {list.map((movie, index) => (
+            {list && list.map((movie, index) => (
               <MovieCard
                movie={movie} 
                key={`movies-${index}`} 
