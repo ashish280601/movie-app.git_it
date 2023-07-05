@@ -1,8 +1,9 @@
-import { ADD_MOVIES, ADD_TO_FAVOURITES, REMOVE_TO_FAVOURITES } from "../actions";
+import { ADD_MOVIES, ADD_TO_FAVOURITES, REMOVE_TO_FAVOURITES, SET_SHOW_FAVOURITES } from "../actions";
 
 const initialMoviesState = {
   list: [],
   favourites: [],
+  showFavourites: false
 };
 export default function movies(state = initialMoviesState, action) {
   // Generally in react code react community prefer to use switch case instead of if else condition
@@ -33,6 +34,11 @@ export default function movies(state = initialMoviesState, action) {
         ...state,
         favourites: filteredArray,
       };
+    case SET_SHOW_FAVOURITES:
+        return {
+            ...state,
+            showFavourites: action.value
+        }
     default:
       return state;
   }
