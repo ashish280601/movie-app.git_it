@@ -1,4 +1,5 @@
-import React, { createContext } from "react";
+import React from "react";
+import { Provider } from "react-redux";
 import ReactDOM from "react-dom/client";
 import { configureStore, applyMiddleware } from "@reduxjs/toolkit";
 import thunk from "redux-thunk";
@@ -48,59 +49,59 @@ const store = configureStore(
 );
 console.log("store", store.getState());
 
-export const StoreContext = createContext();
+// export const StoreContext = createContext();
 
-console.log("StoreContext", StoreContext);
+// console.log("StoreContext", StoreContext);
 
-class Provider extends React.Component {
-  render() {
-    const { store } = this.props;
-    return (
-      <StoreContext.Provider value={store}>
-        {/* this children had all the properties that passes in the provider tag */}
-        {this.props.children}
-      </StoreContext.Provider>
-    );
-  }
-}
+// class Provider extends React.Component {
+//   render() {
+//     const { store } = this.props;
+//     return (
+//       <StoreContext.Provider value={store}>
+//         {/* this children had all the properties that passes in the provider tag */}
+//         {this.props.children}
+//       </StoreContext.Provider>
+//     );
+//   }
+// }
 
-export function connect(callback) {
-  return function (Component) {
-    class ConnectedComponent extends React.Component {
-      constructor(props) {
-        super(props);
-        this.unsubscribe = this.props.store.subscribe(() => this.forceUpdate());
-      }
+// export function connect(callback) {
+//   return function (Component) {
+//     class ConnectedComponent extends React.Component {
+//       constructor(props) {
+//         super(props);
+//         this.unsubscribe = this.props.store.subscribe(() => this.forceUpdate());
+//       }
 
-      componentWillUnmount() {
-        this.unsubscribe();
-      }
-      render() {
-        const {store} = this.props;
-        const state = store.getState();
-        const dataTOBePassedAsProps = callback(state);
-        return (
-          <Component
-           {...dataTOBePassedAsProps}
-           dispatch={store.dispatch} 
-          />
-        );
-      }
-    }
+//       componentWillUnmount() {
+//         this.unsubscribe();
+//       }
+//       render() {
+//         const {store} = this.props;
+//         const state = store.getState();
+//         const dataTOBePassedAsProps = callback(state);
+//         return (
+//           <Component
+//            {...dataTOBePassedAsProps}
+//            dispatch={store.dispatch} 
+//           />
+//         );
+//       }
+//     }
 
-    class ConnectedComponentWrapper extends React.Component {
-      render() {
-        return (
-          <StoreContext.Consumer>
-            {(store) => <ConnectedComponent store={store} />}
-          </StoreContext.Consumer>
-        );
-      }
-    }
+//     class ConnectedComponentWrapper extends React.Component {
+//       render() {
+//         return (
+//           <StoreContext.Consumer>
+//             {(store) => <ConnectedComponent store={store} />}
+//           </StoreContext.Consumer>
+//         );
+//       }
+//     }
 
-    return ConnectedComponentWrapper;
-  };
-}
+//     return ConnectedComponentWrapper;
+//   };
+// }
 // update store by dispatching actions
 // store.dispatch({
 //   type: 'ADD_MOVIES',
